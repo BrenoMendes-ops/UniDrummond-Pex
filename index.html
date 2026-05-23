@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WX Salão de Beleza</title>
+  <style>
+    :root {
+      --warm-white: #f5f2eb;
+      --dark-brown: #2d1e17;
+      --light-brown: #6b4d3d;
+      --soft-pink: #e8c7bd;
+      --cream: #f6eee7;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+      --radius: 28px;
+      --max-width: 1200px;
+      --transition: 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: radial-gradient(circle at top, #f5e4d8 0%, #fdeee7 35%, #fffaf7 100%);
+      color: var(--dark-brown);
+      min-height: 100%;
+    }
+
+    body {
+      padding: 24px;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      overflow: hidden;
+      padding: 32px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 36px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .top-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 36px;
+    }
+
+    .brand {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .brand .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--light-brown);
+      font-size: 0.8rem;
+    }
+
+    .brand h1 {
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .brand p {
+      max-width: 540px;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #4b382f;
+    }
+
+    .hero-image {
+      width: 220px;
+      height: 220px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, #e8c7bd 0%, #f7ece6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+      color: var(--dark-brown);
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-image span {
+      display: block;
+      line-height: 1.4;
+    }
+
+    .sections {
+      display: grid;
+      gap: 32px;
+    }
+
+    .section {
+      padding: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(245,242,235,0.9));
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow: var(--shadow);
+    }
+
+    .section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 18px;
+    }
+
+    .section p {
+      color: #5c463c;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(150, 115, 95, 0.12);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .card small {
+      display: block;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      color: #7c655a;
+    }
+
+    .card strong {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 1.1rem;
+      color: var(--dark-brown);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-row:nth-child(1), .form-row:nth-child(2) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 0.95rem;
+      color: #6b4d3d;
+      font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(143, 107, 90, 0.3);
+      border-radius: 18px;
+      background: #fffaf7;
+      font-size: 0.96rem;
+      color: #3f2d24;
+      outline: none;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--light-brown);
+      transform: translateY(-1px);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 24px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--dark-brown), var(--light-brown));
+      color: white;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 18px 32px rgba(99, 55, 40, 0.22);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .small-note {
+      font-size: 0.95rem;
+      color: #7a5d53;
+      margin-top: 10px;
+    }
+
+    .availability {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .slot {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #fff2ed;
+      color: #5a382b;
+      border: 1px solid rgba(215, 151, 134, 0.4);
+    }
+
+    .alert {
+      margin-top: 16px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: #fef4ef;
+      border: 1px solid rgba(214, 151, 124, 0.4);
+      color: #5c3f34;
+    }
+
+    .hero-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .team-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .team-card {
+      display: grid;
+      gap: 8px;
+      padding: 22px;
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(239,220,210,0.8));
+      border: 1px solid rgba(212, 171, 150, 0.4);
+    }
+
+    .team-card h4 {
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    .team-card small {
+      color: #7b5f54;
+      line-height: 1.6;
+    }
+
+    .hero-row .hero-text {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-text p {
+      max-width: 580px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-row,
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="top-header">
+      <div class="brand">
+        <span class="eyebrow">WX Salão de Beleza</span>
+        <h1>Agende um atendimento presencial ou em domicílio com nossos especialistas.</h1>
+        <p>Escolha o serviço, veja a disponibilidade do profissional e confirme sua reserva em poucos passos.</p>
+      </div>
+      <div class="hero-image">
+        <span>W<span style="font-size:0.8rem;">X</span><br />Beleza e bem-estar</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="hero-row">
+        <div class="hero-text">
+          <h2>Como funciona</h2>
+          <p>Nosso sistema conecta você com profissionais capacitados e permite escolher o serviço ideal. A cada agendamento, confirmamos a disponibilidade em tempo real.</p>
+        </div>
+        <div class="team-list" id="teamList">
+          <div class="team-card">
+            <h4>Walquiria Silva</h4>
+            <small>Especialista em cortes, coloração e penteados femininos.</small>
+          </div>
+          <div class="team-card">
+            <h4>Ana Beatriz</h4>
+            <small>Coloração, mechas e tratamentos capilares de alto padrão.</small>
+          </div>
+          <div class="team-card">
+            <h4>Pedro Santos</h4>
+            <small>Barbeiro e design de sobrancelhas para um visual completo.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Escolha seu serviço</h2>
+      <p>Veja nossos destaques e selecione o atendimento ou pacote ideal para você.</p>
+      <div class="grid-2">
+        <div>
+          <h3>Serviços</h3>
+          <div class="grid-2" id="servicesGrid"></div>
+        </div>
+        <div>
+          <h3>Ofertas especiais</h3>
+          <div class="grid-2" id="offersGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Agendamento</h2>
+      <p>Formulário simples para reservar o horário com o profissional e serviço desejados.</p>
+      <div class="card">
+        <form id="bookingForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="clientName">Nome</label>
+              <input id="clientName" name="clientName" type="text" required placeholder="Seu nome completo" pattern="[^0-9]*" />
+            </div>
+            <div class="form-group">
+              <label for="clientPhone">Telefone</label>
+              <input id="clientPhone" name="clientPhone" type="tel" inputmode="tel" required placeholder="(XX) XXXXX-XXXX" pattern="[0-9+()\s-]*" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="clientEmail">E-mail</label>
+              <input id="clientEmail" name="clientEmail" type="email" placeholder="seu@email.com" />
+            </div>
+            <div class="form-group">
+              <label for="serviceSelect">Serviço</label>
+              <select id="serviceSelect" name="service">
+                <option value="">Selecione um serviço</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="offerSelect">Oferta / Combo</label>
+              <select id="offerSelect" name="offer">
+                <option value="">Selecione uma oferta</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="professionalSelect">Profissional</label>
+              <select id="professionalSelect" name="professional" required>
+                <option value="">Escolha um profissional</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="appointmentDate">Data</label>
+              <input id="appointmentDate" name="date" type="date" required />
+            </div>
+            <div class="form-group">
+              <label for="timeSelect">Horário</label>
+              <select id="timeSelect" name="hour" required>
+                <option value="">Selecione uma data</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="notes">Observações</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="Deseja alguma preferência ou tratamento adicional?"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="button">Agendar agora</button>
+          <p class="small-note">A reserva é confirmada assim que o horário estiver disponível no sistema.</p>
+        </form>
+        <div id="formMessage" class="alert" style="display:none"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Disponibilidade</h2>
+      <p>Receba horários disponíveis de profissionais para a data escolhida.</p>
+      <div id="availabilityContainer" class="availability"></div>
+    </section>
+
+    <section class="section">
+      <h2>Seus agendamentos</h2>
+      <p>Veja os agendamentos futuros e cancele quando necessário.</p>
+      <div id="appointmentsList" class="grid-2"></div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
